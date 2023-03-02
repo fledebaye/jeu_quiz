@@ -6,15 +6,15 @@ function Quiz(){
         this.questions.push(question);
     },
     this.launch = function(){
-        for(let i = 0; i< this.questions.length; i++){
-            let reponse = prompt(this.questions[i].getBody());
-            if(this.questions[i].isCorrecteReponse(reponse)){
+        this.questions.forEach((question) => {
+            let reponse = prompt(question.getBody());
+            if(question.isCorrecteReponse(reponse)){
                 console.log("Gagné");
                 this.nbrCorrect ++;
             }else{
                 console.log("Nul");
             }
-        }
+        })
         this.showresult();
     }
     this.showresult = function(){
@@ -28,7 +28,7 @@ function Question(titre, reponse, reponseCorrecte) {
     this.titre = titre;
     this.reponse = reponse;
     this.reponseCorrecte = reponseCorrecte;
-    this.getBody = function() {1
+    this.getBody = function() {
         let body = this.titre.toUpperCase() + "\n";
         for(let i = 0; i<this.reponse.length; i++){
             body += (i+1) + " : " + this.reponse[i] + "\n";
