@@ -1,3 +1,29 @@
+function Quiz(){
+    this.questions = [];
+    this.nbrCorrect = 0;
+
+    this.addQuestion = function(question){
+        this.questions.push(question);
+    },
+    this.launch = function(){
+        for(let i = 0; i< this.questions.length; i++){
+            let reponse = prompt(this.questions[i].getBody());
+            if(this.questions[i].isCorrecteReponse(reponse)){
+                console.log("Gagné");
+                this.nbrCorrect ++;
+            }else{
+                console.log("Nul");
+            }
+        }
+        this.showresult();
+    }
+    this.showresult = function(){
+        let msg = "Resultats: \n" + this.nbrCorrect + " sur " + this.questions.length + " Correctes";
+        alert(msg);
+    }
+
+}
+
 function Question(titre, reponse, reponseCorrecte) {
     this.titre = titre;
     this.reponse = reponse;
@@ -19,31 +45,19 @@ function Question(titre, reponse, reponseCorrecte) {
             }else{
                 return false;
             }
-S
     }
     
 };
 
-let question1 = new Question("quel est l'age du capitaine?", [43,44,45], 1)
-console.log(question1);
-question1.addReponse(40);
-console.log(question1) ;
+let quiz = new Quiz();
+let question1 = new Question("quel est l'age du capitaine?", [43,44,45], 1);
+quiz.addQuestion(question1);
 
-let bodyQuestion1 = question1.getBody();
-console.log(bodyQuestion1);
+let question2 = new Question("Qui etait le premier president sdu tchad?", ["François","Feliw","Deby"], 1);
+quiz.addQuestion(question2);
 
-let answerUser = prompt(bodyQuestion1);
-if(question1.isCorrecteReponse(answerUser)){
-    console.log("Bravo vous avez gagné");
-}else{
-    console.log("c'est nul");
-}
+let question3 = new Question("Qu'estce qui est jaune et qui attend'?", ["canard","jonathan","pigeon"], 2);
+quiz.addQuestion(question3);
 
-let question2 = new Question("Qui etait le premier president sdu tchad?", ["François","Feliw","Deby"], 1)
-answerUser = prompt(question2.getBody());
-if(question2.isCorrecteReponse(answerUser)){
-    console.log("Bravo vous avez gagné");
-}else{
-    console.log("c'est nul");
-}
-
+console.log(quiz);
+quiz.launch();
